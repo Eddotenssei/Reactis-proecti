@@ -1,14 +1,21 @@
 import { useState } from "react";
+
+import CounterDisplay from "./components/CounterDisplay.jsx";
+import Header from "./components/Header.jsx";
 import CounterButton from "./components/CounterButton.jsx";
+import Message from "./components/Message.jsx";
 
 function App() {
   const [counter, setCounter] = useState(0);
-  const projectName = "Clicker-Game";
-
+  const projectName = "Counter App";
   return (
     <>
-      <h1>{projectName}</h1>
-      <h2>Counter: {counter}</h2>
+      <Header projectName={projectName}/>
+      <CounterDisplay counter={counter}/>
+      <Message count={counter}/>
+
+
+
       <CounterButton
         title={"Increase"}
         handleClick={() => {
