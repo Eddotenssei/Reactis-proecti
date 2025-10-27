@@ -4,7 +4,6 @@ import CounterDisplay from "./components/CounterDisplay";
 import Header from "./components/Header";
 import CounterButton from "./components/CounterButton";
 import Message from "./components/Message";
-import ResetButton from "./components/ResetButton";
 
 function App() {
   const [counter, setCounter] = useState(0);
@@ -27,10 +26,10 @@ function App() {
           setCounter(counter - 1);
         }}
       />
-      <ResetButton
+      <CounterButton
         title={"Reset"}
-        handleReset={() => {
-          setCounter(counter * 0);
+        handleClick={() => {
+          setCounter(0);
         }}
       />
     </>
