@@ -2,8 +2,8 @@ import { useState } from "react";
 import DiceGame from "./components/PlayerDisplay";
 
 function App() {
-  const [player1, setPlayer1] = useState(1);
-  const [player2, setPlayer2] = useState(1);
+  const [player1, setPlayer1] = useState(null);
+  const [player2, setPlayer2] = useState(null);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [winner, setWinner] = useState(null);
   const [round, setRound] = useState(0);
@@ -40,11 +40,54 @@ function App() {
     setRound(0);
   };
 
-  return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h2>2-Player Dice Game</h2>
+  const appStyle = {
+    textAlign: "center",
+    padding: "40px",
+    background: "linear-gradient(135deg, #2b5876, #4e4376)",
+    minHeight: "100vh",
+    color: "white",
+    fontFamily: "'Poppins', sans-serif",
+  };
 
-      <div>
+  const vsStyle = {
+    fontSize: "2rem",
+    fontWeight: "bold",
+    color: "#ffcc00",
+    textShadow: "0 0 10px rgba(255, 204, 0, 0.5)",
+    margin: "0 20px",
+  };
+
+  const winnerStyle = {
+    marginTop: "40px",
+    fontSize: "1.5rem",
+    animation: "pop 0.6s ease-in-out",
+  };
+
+  const buttonStyle = {
+    backgroundColor: "#ffcc00",
+    color: "#222",
+    fontSize: "1rem",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "10px",
+    cursor: "pointer",
+    marginTop: "10px",
+  };
+
+  const playersContainer = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "40px",
+  };
+
+  return (
+    <div style={appStyle}>
+      <h2 style={{ fontSize: "2rem", marginBottom: "30px" }}>
+        2-Player Dice Game
+      </h2>
+
+      <div style={playersContainer}>
         <DiceGame
           PlayerCount="Player 1"
           index={player1}
@@ -52,7 +95,7 @@ function App() {
           isDisabled={currentPlayer === 2 || winner !== null}
         />
 
-        <div style={{ margin: "20px", fontSize: "24px" }}>VS</div>
+        <div style={vsStyle}>VS</div>
 
         <DiceGame
           PlayerCount="Player 2"
@@ -63,11 +106,11 @@ function App() {
       </div>
 
       {winner && (
-        <div style={{ marginTop: "30px", fontSize: "24px" }}>
+        <div style={winnerStyle}>
           <h2>{winner}</h2>
-          <div>
-            <button onClick={resetGame}>Play Again</button>
-          </div>
+          <button style={buttonStyle} onClick={resetGame}>
+            Play Again
+          </button>
         </div>
       )}
     </div>
