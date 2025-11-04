@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DiceGame from "./components/PlayerDisplay";
+import WinnerDisplay from "./components/WinnerDisplay";
 
 function App() {
   const [player1, setPlayer1] = useState(null);
@@ -57,23 +58,6 @@ function App() {
     margin: "0 20px",
   };
 
-  const winnerStyle = {
-    marginTop: "40px",
-    fontSize: "1.5rem",
-    animation: "pop 0.6s ease-in-out",
-  };
-
-  const buttonStyle = {
-    backgroundColor: "#ffcc00",
-    color: "#222",
-    fontSize: "1rem",
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    marginTop: "10px",
-  };
-
   const playersContainer = {
     display: "flex",
     justifyContent: "center",
@@ -81,12 +65,15 @@ function App() {
     gap: "40px",
   };
 
+  let winnerDisplay = null;
+  if (winner !== null) {
+    winnerDisplay = <WinnerDisplay winner={winner} resetGame={resetGame} />;
+  }
   return (
     <div style={appStyle}>
       <h2 style={{ fontSize: "2rem", marginBottom: "30px" }}>
         2-Player Dice Game
       </h2>
-
       <div style={playersContainer}>
         <DiceGame
           PlayerCount="Player 1"
@@ -104,15 +91,7 @@ function App() {
           isDisabled={currentPlayer === 1 || winner !== null}
         />
       </div>
-
-      {winner && (
-        <div style={winnerStyle}>
-          <h2>{winner}</h2>
-          <button style={buttonStyle} onClick={resetGame}>
-            Play Again
-          </button>
-        </div>
-      )}
+      {winnerDisplay}
     </div>
   );
 }
