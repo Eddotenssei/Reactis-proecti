@@ -5,42 +5,40 @@ import WinnerDisplay from "./components/WinnerDisplay";
 function App() {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
-  const [rounds, setRounds] = useState(0);
-
-  const currentPlayer = () => {
-    if (player1 !== null) return 2;
-
-    return 1;
-  };
+  const [turn, setTurn] = useState(1);
+  const [showWinner, setShowWinner] = useState(false);
+  const [player1Wins, setPlayer1Wins] = useState(0);
+  const [player2Wins, setPlayer2Wins] = useState(0);
 
   const rollDice = () => {
     const randomNumber = Math.floor(Math.random() * 6) + 1;
 
-    if (currentPlayer() === 1) {
+    if (turn === 1) {
       setPlayer1(randomNumber);
+      setTurn(2);
     } else {
       setPlayer2(randomNumber);
-      setRounds(rounds + 1);
+      setShowWinner(true);
+
+      if (player1 > randomNumber) {
+        setPlayer1Wins(player1Wins + 1);
+      } else if (randomNumber > player1) {
+        setPlayer2Wins(player2Wins + 1);
+      }
     }
   };
 
   const winner = () => {
-    if (player2 === null) {
-      return null;
-    }
-    if (player1 > player2) {
-      return "Player1";
-    } else if (player2 > player1) {
-      return "Player2";
-    } else {
-      return "Tie";
-    }
+    if (player1 > player2) return "Player1 Wins!";
+    if (player2 > player1) return "Player2 Wins!";
+    return "Tie!";
   };
 
   const resetGame = () => {
     setPlayer1(null);
     setPlayer2(null);
-    setRounds(0);
+    setTurn(1);
+    setShowWinner(false);
   };
 
   const appStyle = {
@@ -67,6 +65,16 @@ function App() {
     gap: "40px",
   };
 
+  const scoreStyle = {
+    marginTop: "30px",
+    fontSize: "1.2rem",
+  };
+
+  let winnerBanner = null;
+  if (showWinner) {
+    winnerBanner = <WinnerDisplay winner={winner()} resetGame={resetGame} />;
+  }
+
   return (
     <div style={appStyle}>
       <h2 style={{ fontSize: "2rem", marginBottom: "30px" }}>
@@ -77,19 +85,22 @@ function App() {
           PlayerCount="Player 1"
           index={player1}
           handleClick={rollDice}
-          isDisabled={currentPlayer() !== 1}
+          isDisabled={turn !== 1 || showWinner}
         />
-
         <div style={vsStyle}>VS</div>
-
         <DiceGame
           PlayerCount="Player 2"
           index={player2}
           handleClick={rollDice}
-          isDisabled={currentPlayer() !== 2}
+          isDisabled={turn !== 2 || showWinner}
         />
       </div>
-      {winner() && <WinnerDisplay winner={winner()} resetGame={resetGame} />}
+
+      <div style={scoreStyle}>
+        Player 1 Wins: {player1Wins} | Player 2 Wins: {player2Wins}
+      </div>
+
+      {winnerBanner}
     </div>
   );
 }
