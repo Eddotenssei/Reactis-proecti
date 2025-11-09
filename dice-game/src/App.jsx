@@ -5,12 +5,13 @@ import WinnerDisplay from "./components/WinnerDisplay";
 function App() {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
+  const [rounds, setRounds] = useState(0);
 
-  const currentPlayer = ()=>{
-    if(player1 !== null) return 2;
+  const currentPlayer = () => {
+    if (player1 !== null) return 2;
 
     return 1;
-  }
+  };
 
   const rollDice = () => {
     const randomNumber = Math.floor(Math.random() * 6) + 1;
@@ -19,26 +20,27 @@ function App() {
       setPlayer1(randomNumber);
     } else {
       setPlayer2(randomNumber);
+      setRounds(rounds + 1);
     }
   };
 
-  const winner = () =>{
+  const winner = () => {
     if (player2 === null) {
-      return null
+      return null;
     }
-    if(player1 > player2){
-      return "Player1"
-    }else if (player2 > player1) {
-      return "Player2"
-    }else{
-      return "Tie"
+    if (player1 > player2) {
+      return "Player1";
+    } else if (player2 > player1) {
+      return "Player2";
+    } else {
+      return "Tie";
     }
-  }
-
+  };
 
   const resetGame = () => {
     setPlayer1(null);
     setPlayer2(null);
+    setRounds(0);
   };
 
   const appStyle = {
@@ -75,7 +77,7 @@ function App() {
           PlayerCount="Player 1"
           index={player1}
           handleClick={rollDice}
-          isDisabled={currentPlayer() !== 1 }
+          isDisabled={currentPlayer() !== 1}
         />
 
         <div style={vsStyle}>VS</div>
@@ -84,12 +86,10 @@ function App() {
           PlayerCount="Player 2"
           index={player2}
           handleClick={rollDice}
-          isDisabled={currentPlayer() !== 2 }
+          isDisabled={currentPlayer() !== 2}
         />
       </div>
-      {winner() &&
-      <WinnerDisplay winner={winner()} resetGame={resetGame} />
-       }
+      {winner() && <WinnerDisplay winner={winner()} resetGame={resetGame} />}
     </div>
   );
 }
