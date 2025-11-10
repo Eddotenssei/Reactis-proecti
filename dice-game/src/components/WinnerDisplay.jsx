@@ -1,4 +1,4 @@
-export default function WinnerDisplay({ winner, resetGame }) {
+export default function WinnerDisplay({ winner, resetGame, gameOver }) {
   const WinnerButtonStyle = {
     backgroundColor: "#ffcc00",
     color: "#222",
@@ -17,6 +17,7 @@ export default function WinnerDisplay({ winner, resetGame }) {
 
   return (
     <div style={winnerStyle}>
+      <h2>{gameOver}</h2>
       <h2>{winner}</h2>
       <button style={WinnerButtonStyle} onClick={resetGame}>
         Play Again

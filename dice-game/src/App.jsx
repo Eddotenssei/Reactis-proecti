@@ -5,9 +5,12 @@ import WinnerDisplay from "./components/WinnerDisplay";
 function App() {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
-
   const [player1Wins, setPlayer1Wins] = useState(0);
   const [player2Wins, setPlayer2Wins] = useState(0);
+  const [rounds, setRound] = useState(1);
+  const gameOverCount = 3;
+
+  const isGameOver = rounds > gameOverCount;
 
   const currentPlayer = () => {
     if (player1 === null) {
@@ -16,7 +19,6 @@ function App() {
       return 2;
     }
   };
-
   const rollDice = () => {
     const randomNumber = Math.floor(Math.random() * 6) + 1;
 
@@ -25,6 +27,7 @@ function App() {
     } else {
       setPlayer2(randomNumber);
 
+      setRound(rounds + 1);
       if (player1 > randomNumber) {
         setPlayer1Wins(player1Wins + 1);
       } else if (randomNumber > player1) {
@@ -42,10 +45,76 @@ function App() {
     return "Tie!";
   };
 
-  const resetGame = () => {
+  const playAgainNextRound = () => {
     setPlayer1(null);
     setPlayer2(null);
   };
+  const playAgain = () => {
+    setPlayer1(null);
+    setPlayer2(null);
+    setPlayer1Wins(0);
+    setPlayer2Wins(0);
+    setRound(1);
+  };
+  if (isGameOver) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          padding: "40px 0",
+          minHeight: "100vh",
+          background: "linear-gradient(135deg, #e3f2fd 0%, #c8e6c9 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#fff",
+            borderRadius: "24px",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.18)",
+            padding: "48px 60px",
+            maxWidth: "460px",
+            width: "100%",
+            marginBottom: "30px",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "2.2rem",
+              margin: "0 0 20px 0",
+              fontWeight: "bold",
+              color: "#333",
+              letterSpacing: "1px",
+              textShadow: "0 2px 10px rgba(76,175,80,0.08)",
+            }}
+          >
+            player 1 wins the game
+          </h1>
+          <button
+            onClick={playAgain}
+            style={{
+              marginTop: "18px",
+              padding: "16px 40px",
+              fontSize: "20px",
+              backgroundColor: "#4CAF50",
+              color: "white",
+              border: "none",
+              borderRadius: "12px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 4px 18px rgba(33, 150, 243, 0.13)",
+              letterSpacing: "2px",
+            }}
+          >
+            🎲 Play Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const appStyle = {
     textAlign: "center",
@@ -100,8 +169,9 @@ function App() {
       <div style={scoreStyle}>
         Player 1 Wins: {player1Wins} | Player 2 Wins: {player2Wins}
       </div>
-
-      {winner() && <WinnerDisplay winner={winner()} resetGame={resetGame} />}
+      {winner() && (
+        <WinnerDisplay winner={winner()} resetGame={playAgainNextRound} />
+      )}
     </div>
   );
 }
