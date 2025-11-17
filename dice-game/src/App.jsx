@@ -46,18 +46,16 @@ function App() {
     return "Tie!";
   };
 
-
   const playAgainNextRound = () => {
     setPlayer1(null);
     setPlayer2(null);
-
   };
 
   let wonTheGame = "Its a tie";
-  if (player1Wins > player2Wins){
-    wonTheGame = "Player 1 won the game"
-  }else if(player2Wins > player1Wins){
-    wonTheGame = "player 2 won the game"
+  if (player1Wins > player2Wins) {
+    wonTheGame = "Player 1 won the game";
+  } else if (player2Wins > player1Wins) {
+    wonTheGame = "player 2 won the game";
   }
   const playAgain = () => {
     setPlayer1(null);
@@ -67,7 +65,7 @@ function App() {
     setRound(1);
   };
   if (isGameOver) {
-     return <GameOverDisplay playAgain={playAgain} wonTheGame={wonTheGame} />
+    return <GameOverDisplay playAgain={playAgain} wonTheGame={wonTheGame} />;
   }
 
   const appStyle = {
