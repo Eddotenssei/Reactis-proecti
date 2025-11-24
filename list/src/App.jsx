@@ -28,6 +28,7 @@ export default function App() {
   };
 
   return (
+    <>
     <div className="app">
       <h1>Todo List</h1>
 
@@ -64,5 +65,6 @@ export default function App() {
         </div>
       </div>
     </div>
+    </>
   );
 }
