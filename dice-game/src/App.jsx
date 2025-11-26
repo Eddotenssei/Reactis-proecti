@@ -11,6 +11,8 @@ function App() {
   const [rounds, setRound] = useState(1);
   const gameOverCount = 3;
 
+  console.log("dsgdsf");
+  
   const isGameOver = rounds > gameOverCount;
 
   const currentPlayer = () => {
