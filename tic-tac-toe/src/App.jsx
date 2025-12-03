@@ -17,13 +17,11 @@ function App() {
             currentPlayer={currentPlayer}
             initialName="Player 1"
             symbol="X"
-            // isActive={currentPlayer === "X"}
           />
           <Player
             currentPlayer={currentPlayer}
             initialName="Player 2"
             symbol="O"
-            // isActive={currentPlayer === "O"}
           />
         </ol>
         <GameBoard

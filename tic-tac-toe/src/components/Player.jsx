@@ -4,7 +4,6 @@ export default function Player({
   currentPlayer,
   initialName,
   symbol,
-  // isActive
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
@@ -31,7 +30,6 @@ export default function Player({
   }
 
   return (
-    // <li className={isActive ? "active" : undefined}>
     <li className={currentPlayer === symbol ? "active" : undefined}>
       <span className="player">
         {editablePlayerName}
