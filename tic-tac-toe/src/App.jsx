@@ -3,6 +3,13 @@ import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./winning-combinations";
+import GameOver from "./components/GameOver";
+
+let initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 
 const deriveActivePlayer = (gameTurns) => {
   return gameTurns.length % 2 === 0 ? "X" : "O";
@@ -12,13 +19,8 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ];
-
   const gameBoard = initialGameBoard;
+  // const gameBoard = initialGameBoard.map((r)=> [...r]);
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -26,9 +28,38 @@ function App() {
     gameBoard[rowIndex][colIndex] = player;
   }
 
+  let winner = null;
+
+  for (const combination of WINNING_COMBINATIONS) {
+    const firstSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSymbol = gameBoard[combination[2].row][combination[2].column];
+    if (
+      firstSymbol &&
+      firstSymbol === secondSymbol &&
+      firstSymbol === thirdSymbol
+    ) {
+      winner = firstSymbol;
+    }
+  }
+
+  const hasDraw = gameTurns.length === 9 && !winner;
+
+  function handleReset() {
+    setGameTurns([]);
+
+    initialGameBoard = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ];
+    // SECONDARY WAY TO RESET THE BOARD
+    // setGameTurns([]);
+  }
+
   function handleSquareSelect(rowIndex, colIndex) {
     setGameTurns((prevValue) => {
-      let currentPlayer = prevValue.length % 2 === 0 ? "X" : "O";
+      let currentPlayer = deriveActivePlayer(prevValue);
 
       const newTurn = {
         square: { rowIndex, colIndex },
@@ -53,6 +84,14 @@ function App() {
             symbol="O"
           />
         </ol>
+        {winner || hasDraw ? (
+          <GameOver
+            symbol={winner}
+            hasDraw={hasDraw}
+            handleReset={handleReset}
+          />
+        ) : null}
+
         <GameBoard onSquareSelect={handleSquareSelect} gameBoard={gameBoard} />
       </div>
 
