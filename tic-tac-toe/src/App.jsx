@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
@@ -16,11 +16,23 @@ const deriveActivePlayer = (gameTurns) => {
 };
 
 function App() {
+  const [players, setPlayers] = useState({ X: "Player 1", O: "Player 2" });
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  const gameBoard = initialGameBoard;
-  // const gameBoard = initialGameBoard.map((r)=> [...r]);
+
+  function handleSetPlayers(symbol, newName){ {
+    setPlayers((prevPlayers) =>{
+      return { ...prevPlayers, [symbol]: newName }
+    })
+  }}
+
+
+
+
+
+  // const gameBoard = initialGameBoard;
+  const gameBoard = [...initialGameBoard.map((r)=> [...r])];
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -39,7 +51,7 @@ function App() {
       firstSymbol === secondSymbol &&
       firstSymbol === thirdSymbol
     ) {
-      winner = firstSymbol;
+      winner = players[firstSymbol];
     }
   }
 
@@ -48,12 +60,12 @@ function App() {
   function handleReset() {
     setGameTurns([]);
 
-    initialGameBoard = [
-      [null, null, null],
-      [null, null, null],
-      [null, null, null],
-    ];
     // SECONDARY WAY TO RESET THE BOARD
+    // initialGameBoard = [
+    //   [null, null, null],
+    //   [null, null, null],
+    //   [null, null, null],
+    // ];
     // setGameTurns([]);
   }
 
@@ -77,6 +89,7 @@ function App() {
             isActive={activePlayer === "X"}
             initialName="Player 1"
             symbol="X"
+            onPlayersChanged={handleSetPlayers}
           />
           <Player
             isActive={activePlayer === "O"}
@@ -89,6 +102,7 @@ function App() {
             symbol={winner}
             hasDraw={hasDraw}
             handleReset={handleReset}
+            onPlayersChanged={handleSetPlayers}
           />
         ) : null}
 
@@ -100,4 +114,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

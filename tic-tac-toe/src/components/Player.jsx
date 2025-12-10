@@ -4,16 +4,23 @@ export default function Player({
   initialName,
   symbol,
   isActive,
+  onPlayersChanged
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
 
   function handleNameChange(event) {
     setPlayerName(event.target.value);
+    
+    
+
   }
 
   function handleEditClick() {
     setIsEditing((prevValue) => !prevValue);
+    if (isEditing){
+      onPlayersChanged(symbol, playerName);
+    }
   }
 
   let editablePlayerName = <span className="player-name">{playerName}</span>;
