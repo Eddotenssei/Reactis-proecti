@@ -1,11 +1,14 @@
+import { QUIZ_DATA } from "../quiz-questions"
+
 export default function QuizPage() {
+  const questionData = QUIZ_DATA[0]
+  
   return (
     <>
-      <h1>What year did ww2 ended?</h1>
-      <p>1876</p>
-      <p>1980</p>
-      <p>1945</p>
-      <p>1958</p>
+      <h1>{questionData.question}</h1>
+      {questionData.answers.map((item)=>{
+        return <p>{item}</p>;
+      })}
     </>
   );
 }
