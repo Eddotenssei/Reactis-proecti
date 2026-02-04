@@ -1,5 +1,6 @@
 import { useState } from "react";
 import QuizPage from "./components/QuizPage";
+import "./App.css";
 
 export default function App() {
   const [difficulty, setDifficulty] = useState(null);
@@ -9,36 +10,29 @@ export default function App() {
   }
 
   return (
-    <>
-      <h1>Welcome to the Game</h1>
-      <button
-        onClick={() => {
-          setDifficulty("easy");
-          console.log(difficulty);
-        }}
-      >
-        Easy
-      </button>
-      <button
-        onClick={() => {
-          setDifficulty("medium");
-          console.log(difficulty);
-        }}
-      >
-        Medium
-      </button>
-      <button
-        onClick={() => {
-          setDifficulty("hard");
-          console.log(difficulty);
-        }}
-      >
-        Hard
-      </button>
-    </>
+    <div className="welcome-container">
+      <h1 className="welcome-title">Welcome to the Quiz Game</h1>
+      <p className="welcome-text">Choose your difficulty to start:</p>
+      <div className="difficulty-buttons">
+        <button
+          className="difficulty-btn easy"
+          onClick={() => setDifficulty("easy")}
+        >
+          Easy
+        </button>
+        <button
+          className="difficulty-btn medium"
+          onClick={() => setDifficulty("medium")}
+        >
+          Medium
+        </button>
+        <button
+          className="difficulty-btn hard"
+          onClick={() => setDifficulty("hard")}
+        >
+          Hard
+        </button>
+      </div>
+    </div>
   );
 }
-
-// ფუნქიონალი გვინდა რომ ავირჩიოთ დონე {easy, medium, hard}, +
-// სანამ დონე არ არის არჩეული მანამდე კითვა არ ჩანს,
-// გვაქ ასევე კითხვები: კითხვა გამოიტანოს, და ასევე გამოიტანოს 4 პასუხი რომელიც ექნება იუზერს ასარჩევად დანუ რათქმუნდა პასუხის გაცემის შემდეგ გდავიდთ შემდეგ კითხვაზე.

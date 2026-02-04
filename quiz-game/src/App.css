@@ -1,0 +1,144 @@
+/* Reset-ish */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main container */
+.quiz-container {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Question */
+.quiz-question {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Answers layout */
+.quiz-page-box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Answer buttons */
+.quiz-answer {
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid #667eea;
+  background-color: white;
+  color: #667eea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-answer:hover {
+  background-color: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.quiz-answer:active {
+  transform: scale(0.98);
+}
+
+/* Game over screen */
+.game-over-box {
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.game-over-box h1 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.game-over-box h3 {
+  margin: 0.5rem 0;
+  color: #555;
+}
+/* Welcome screen */
+.welcome-container {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.welcome-text {
+  margin-bottom: 2rem;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Difficulty buttons */
+.difficulty-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.difficulty-btn {
+  flex: 1;
+  padding: 0.9rem 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.difficulty-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* Specific colors for each difficulty */
+.difficulty-btn.easy {
+  background-color: #34d399; /* green */
+}
+
+.difficulty-btn.medium {
+  background-color: #fbbf24; /* yellow/orange */
+  color: #111;
+}
+
+.difficulty-btn.hard {
+  background-color: #f87171; /* red */
+}
+
+/* Optional: mobile-friendly */
+@media (max-width: 480px) {
+  .difficulty-buttons {
+    flex-direction: column;
+  }
+}
