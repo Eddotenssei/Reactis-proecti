@@ -1,35 +1,31 @@
 import { useState } from "react";
 import QuizPage from "./components/QuizPage";
+import { QUIZ_DATA } from "./quiz-questions";
 import "./App.css";
 
 export default function App() {
-  const [difficulty, setDifficulty] = useState(null);
+  const [questions, setQuestions] = useState(null);
 
-  if (difficulty !== null) {
-    return <QuizPage />;
+  function getQuestions(difficulty) {
+    setQuestions(QUIZ_DATA.filter((q) => q.difficulty === difficulty));
+  }
+
+  if (questions !== null) {
+    return <QuizPage questions={questions} />;
   }
 
   return (
-    <div className="welcome-container">
-      <h1 className="welcome-title">Welcome to the Quiz Game</h1>
-      <p className="welcome-text">Choose your difficulty to start:</p>
+    <div className="app-container">
+      <h1 className="title">Welcome to the Game 🎮</h1>
+
       <div className="difficulty-buttons">
-        <button
-          className="difficulty-btn easy"
-          onClick={() => setDifficulty("easy")}
-        >
+        <button onClick={() => getQuestions("Easy")} className="easy">
           Easy
         </button>
-        <button
-          className="difficulty-btn medium"
-          onClick={() => setDifficulty("medium")}
-        >
+        <button onClick={() => getQuestions("Medium")} className="medium">
           Medium
         </button>
-        <button
-          className="difficulty-btn hard"
-          onClick={() => setDifficulty("hard")}
-        >
+        <button onClick={() => getQuestions("Hard")} className="hard">
           Hard
         </button>
       </div>

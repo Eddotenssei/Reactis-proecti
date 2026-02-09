@@ -1,144 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Lato:wght@400;700&display=swap");
+
+
+
+
+.correct {
+  background-color: #00ff00;
+}
+
+.wrong {
+  background-color: #ff0000;
+}
+
 /* Reset-ish */
+/* GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: radial-gradient(circle at top, #1f2937, #020617);
+  font-family: "Inter", system-ui, sans-serif;
+  color: #e5e7eb;
 }
 
-/* Main container */
+/* CARD WRAPPER (home + quiz) */
+.app-container,
 .quiz-container {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 16px;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 520px;
+  background: #020617;
+  border-radius: 18px;
+  padding: 40px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
   text-align: center;
 }
 
-/* Question */
+/* HOME */
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 32px;
+}
+
+.difficulty-buttons {
+  display: grid;
+  gap: 16px;
+}
+
+.difficulty-buttons button {
+  padding: 16px;
+  font-size: 1.05rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: #020617;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.difficulty-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.easy {
+  background: #4ade80;
+}
+
+.medium {
+  background: #facc15;
+}
+
+.hard {
+  background: #f87171;
+}
+
+/* QUIZ */
 .quiz-question {
   font-size: 1.4rem;
-  margin-bottom: 1.5rem;
-  color: #333;
+  margin-bottom: 28px;
+  line-height: 1.4;
 }
 
-/* Answers layout */
-.quiz-page-box {
+.answers {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 14px;
 }
 
-/* Answer buttons */
-.quiz-answer {
-  padding: 0.9rem 1rem;
-  font-size: 1rem;
+.answers button {
+  padding: 14px 16px;
   border-radius: 10px;
-  border: 2px solid #667eea;
-  background-color: white;
-  color: #667eea;
+  border: 1px solid #1e293b;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.quiz-answer:hover {
-  background-color: #667eea;
+.answers button:hover:not(:disabled) {
+  background: #020617;
+  transform: scale(1.02);
+}
+
+.answers button.correct {
+  background: #16a34a;
+  border-color: #16a34a;
   color: white;
-  transform: translateY(-2px);
 }
 
-.quiz-answer:active {
-  transform: scale(0.98);
-}
-
-/* Game over screen */
-.game-over-box {
-  background: white;
-  padding: 3rem;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.game-over-box h1 {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.game-over-box h3 {
-  margin: 0.5rem 0;
-  color: #555;
-}
-/* Welcome screen */
-.welcome-container {
-  background: white;
-  padding: 3rem 2rem;
-  border-radius: 16px;
-  max-width: 500px;
-  margin: 2rem auto;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.welcome-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.welcome-text {
-  margin-bottom: 2rem;
-  color: #555;
-  font-size: 1.1rem;
-}
-
-/* Difficulty buttons */
-.difficulty-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.difficulty-btn {
-  flex: 1;
-  padding: 0.9rem 0;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
+.answers button.wrong {
+  background: #dc2626;
+  border-color: #dc2626;
   color: white;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.difficulty-btn:hover {
-  transform: translateY(-3px);
-  opacity: 0.9;
+.answers button:disabled {
+  opacity: 0.85;
+  cursor: default;
 }
 
-/* Specific colors for each difficulty */
-.difficulty-btn.easy {
-  background-color: #34d399; /* green */
-}
-
-.difficulty-btn.medium {
-  background-color: #fbbf24; /* yellow/orange */
-  color: #111;
-}
-
-.difficulty-btn.hard {
-  background-color: #f87171; /* red */
-}
-
-/* Optional: mobile-friendly */
-@media (max-width: 480px) {
-  .difficulty-buttons {
-    flex-direction: column;
-  }
+/* FINISH */
+.quiz-finished {
+  font-size: 1.8rem;
+  font-weight: 600;
 }

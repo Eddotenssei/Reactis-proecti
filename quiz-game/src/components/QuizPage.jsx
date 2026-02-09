@@ -1,53 +1,61 @@
-import { QUIZ_DATA } from "../quiz-questions";
 import { useState } from "react";
-import "../App.css";
 
-export default function QuizPage() {
-  const [index, setCurrentQuestion] = useState(0);
-  // let rightAnswers = 0
-  // let wrongAnswers = 0
-  const [rightAnswers, setRightAnswers] = useState(0);
-  const [wrongAnswers, setWrongAnswers] = useState(0);
-  
-  const questionData = QUIZ_DATA[index];
-  if (index >= QUIZ_DATA.length) {
-    return(
-       <div className="game-over-box">
-      <h1>Game Over</h1>
-      <h3>right answers = {rightAnswers * 100 / 10}%</h3>
-      <h3>wrong Answers = {wrongAnswers * 100 / 10}%</h3>
-    </div>
-    )
-      
-    
+export default function QuizPage({ questions }) {
+  const [index, setIndex] = useState(0);
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [maxAnswers, setMaxAnswers] = useState(false);
+
+  const currentQuestionData = questions[index];
+
+  const handleAnswerClick = (answerIndex) => {
+    setSelectedAnswerIndex(answerIndex);
+    setMaxAnswers(true);
+
+    setTimeout(() => {
+      setIndex((prev) => prev + 1);
+      setSelectedAnswerIndex(null);
+      setMaxAnswers(false);
+    }, 2000);
+  };
+
+  if (index === questions.length) {
+    return (
+      <div className="quiz-finished">
+        🎉 You finished the quiz!
+      </div>
+    );
   }
 
   return (
-    <>
-       <div className="quiz-container">
-    <h1 className="quiz-question">{questionData.question}</h1>
+    <div className="quiz-container">
+      <h1 className="quiz-question">
+        {currentQuestionData.question}
+      </h1>
 
-    <div className="quiz-page-box">
-      {questionData.answers.map((item, answerIndex) => {
-        return (
-          <button
-            className="quiz-answer"
-            key={answerIndex}
-            onClick={() => {
-              if (questionData.correct === answerIndex) {
-                setRightAnswers(rightAnswers + 1);
-              } else {
-                setWrongAnswers(wrongAnswers + 1);
-              }
-              setCurrentQuestion((prev) => prev + 1);
-            }}
-          >
-            {item}
-          </button>
-        );
-      })}
+      <div className="answers">
+        {currentQuestionData.answers.map((answer, i) => {
+          let className = "";
+
+          if (i === selectedAnswerIndex) {
+            className =
+              i === currentQuestionData.correct
+                ? "correct"
+                : "wrong";
+          }
+
+          return (
+            <button
+              key={i}
+              onClick={() => handleAnswerClick(i)}
+              className={className}
+              disabled={maxAnswers}
+            >
+              {answer}
+            </button>
+          );
+        })}
+        <h2>timer:</h2>
+      </div>
     </div>
-  </div>
-    </>
   );
 }
