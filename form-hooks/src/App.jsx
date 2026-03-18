@@ -23,7 +23,7 @@ const regions = [
 const schema = z.object({
   firstName: z.string().min(2, "სახელი სავალდებულოა"),
   lastName: z.string().min(2, "გვარი სავალდებულოა"),
-  email: z.string().email("არასწორი ელ.ფოსტა"),
+  email: z.email("არასწორი ელ.ფოსტა"),
   phone: z.string().min(9, "ნომერი უნდა იყოს მინიმუმ 9 სიმბოლო").max(9, "ნომერი უნდა იყოს მაქსიმუმ 9 სიმბოლო"),
   class: z.coerce
     .number()
