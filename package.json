@@ -1,0 +1,23 @@
+{
+  "name": "reactis-proecti",
+  "version": "1.0.0",
+  "description": "reademi test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eddotenssei/Reactis-proecti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eddotenssei/Reactis-proecti/issues"
+  },
+  "homepage": "https://github.com/Eddotenssei/Reactis-proecti#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
