@@ -10,7 +10,7 @@ const schema = z.object({
   email: z.email("არასწორი ელ.ფოსტა"),
 });
 
-export default function login() {
+export default function Login() {
     
     
     const {

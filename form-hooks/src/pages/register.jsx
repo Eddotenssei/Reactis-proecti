@@ -32,7 +32,7 @@ const schema = z.object({
   username: z.string().min(2, "მინიმუმ 2 სიმბოლო"),
 });
 
-export default function register() {
+export default function Register() {
   const {
     register,
     handleSubmit,
