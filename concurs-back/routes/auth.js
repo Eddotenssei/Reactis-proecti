@@ -1,9 +1,8 @@
 import express from "express";
-import { z } from "zod";
-import { pool } from "../data/data.js";
+import { studentSchema } from "../validations/student.js"; // ან auth.js
+import { pool } from "../data/db.js";
 
 const router = express.Router();
-
 
 router.get("/students", async (req, res) => {
   try {
@@ -17,7 +16,14 @@ router.get("/students", async (req, res) => {
 
 router.post("/students", async (req, res) => {
   try {
-    const validated = studentSchema.parse(req.body);
+    const result = registerSchema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        message: "Validation error",
+        errors: result.error.flatten().fieldErrors,
+      });
+    }
 
     const {
       first_name,
@@ -28,7 +34,7 @@ router.post("/students", async (req, res) => {
       region,
       username,
       password,
-    } = validated;
+    } = result.data;
 
     const sql = `
       INSERT INTO students 
@@ -48,9 +54,10 @@ router.post("/students", async (req, res) => {
     ]);
 
     res.status(201).json({ message: "Student inserted successfully" });
+
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: "Invalid data" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 

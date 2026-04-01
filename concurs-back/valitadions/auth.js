@@ -11,4 +11,13 @@ import { z } from "zod";
       password: z.string().min(6).max(100),
     });
 
+    export const loginSchema = registerSchema.pick({
+  email: true,
+  password: true,
+});
+
+
+
+
+    
     
