@@ -20,12 +20,12 @@ export default function Login() {
       } = useForm({
         resolver: zodResolver(schema),
       });
-    
+      
       const onSubmit = (data) => {
         console.log(data);
       };
-    
-    return(
+      
+      return(
         <>
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-yellow-400 px-4">
       <form
