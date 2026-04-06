@@ -3,32 +3,31 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
-
 import Register from "./pages/register";
 import Login from "./pages/login";
-import Layout from "./pages/Layout";
+import Layout from "./pages/layout";
 import Home from "./pages/home";
 
-
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [{
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
         path: "/register",
-        element: <Register />
+        element: <Register />,
       },
-    {
+      {
         path: "/login",
-        element: <Login />
+        element: <Login />,
       },
-    {
+      {
         path: "/",
-        element: <Home />
-      }
-    ]
-    }
-  ]);
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
