@@ -13,7 +13,6 @@ export default function NewsBlock() {
         </h3>
       </div>
 
-      {/* Buttons container */}
       <div className="flex gap-4">
         <button className="bg-[#243D4D] text-white px-2 py-2">1</button>
         <button className="bg-[#243D4D] text-white px-2 py-2">2</button>
