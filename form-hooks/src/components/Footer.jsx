@@ -1,9 +1,9 @@
 import logo from "../assets/new-logo.png";
 
 export default function Footer() {
-    return <>
-    
-    <style>{`
+  return (
+    <>
+      <style>{`
         .mziuri-footer-link:hover {
           color: #f0c060 !important;
           padding-left: 6px !important;
@@ -12,10 +12,11 @@ export default function Footer() {
           color: #f0c060 !important;
         }
       `}</style>
-    <footer
+      <footer
         style={{
           width: "100%",
-          background: "linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%)",
+          background:
+            "linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #16213e 100%)",
           borderTop: "2px solid #e8a020",
           padding: "48px 0 0 0",
           position: "relative",
@@ -54,7 +55,8 @@ export default function Footer() {
                   marginBottom: 6,
                 }}
               >
-                საინფორმაციო ტექნოლოგიების<br />
+                საინფორმაციო ტექნოლოგიების
+                <br />
                 ცენტრი <span style={{ color: "#f0c060" }}>«მზიური»</span>
               </div>
 
@@ -133,7 +135,15 @@ export default function Footer() {
               </h4>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: 9 }}>
-                  <a href="#" className="mziuri-footer-link" style={{ color: "#a0b0cc", textDecoration: "none", fontSize: 13.5 }}>
+                  <a
+                    href="#"
+                    className="mziuri-footer-link"
+                    style={{
+                      color: "#a0b0cc",
+                      textDecoration: "none",
+                      fontSize: 13.5,
+                    }}
+                  >
                     კონტაქტი
                   </a>
                 </li>
@@ -143,18 +153,38 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mziuri-footer-link"
-                    style={{ color: "#a0b0cc", textDecoration: "none", fontSize: 13.5 }}
+                    style={{
+                      color: "#a0b0cc",
+                      textDecoration: "none",
+                      fontSize: 13.5,
+                    }}
                   >
                     მთავარი საიტი (mziuri.ge)
                   </a>
                 </li>
                 <li style={{ marginBottom: 9 }}>
-                  <a href="#" className="mziuri-footer-link" style={{ color: "#a0b0cc", textDecoration: "none", fontSize: 13.5 }}>
+                  <a
+                    href="#"
+                    className="mziuri-footer-link"
+                    style={{
+                      color: "#a0b0cc",
+                      textDecoration: "none",
+                      fontSize: 13.5,
+                    }}
+                  >
                     ინტერნეტ შეჯიბრი
                   </a>
                 </li>
                 <li style={{ marginBottom: 9 }}>
-                  <a href="#" className="mziuri-footer-link" style={{ color: "#a0b0cc", textDecoration: "none", fontSize: 13.5 }}>
+                  <a
+                    href="#"
+                    className="mziuri-footer-link"
+                    style={{
+                      color: "#a0b0cc",
+                      textDecoration: "none",
+                      fontSize: 13.5,
+                    }}
+                  >
                     იმედი ხვალის
                   </a>
                 </li>
@@ -178,7 +208,11 @@ export default function Footer() {
               <a
                 href="https://mziuri.ge"
                 className="mziuri-copyright-link"
-                style={{ color: "#e8a020", textDecoration: "none", fontWeight: 600 }}
+                style={{
+                  color: "#e8a020",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                }}
               >
                 mziuri.ge
               </a>
@@ -200,4 +234,5 @@ export default function Footer() {
         </div>
       </footer>
     </>
+  );
 }

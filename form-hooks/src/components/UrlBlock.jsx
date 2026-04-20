@@ -3,7 +3,7 @@ import blog from "../assets/mziuris-blogi.png";
 import concurs from "../assets/matematikuri.png";
 import imedi from "../assets/imedi-xvalis.png";
 
-export default function JoinUs() {
+export default function UrlBLock() {
   return (<>   
   <div className="flex flex-col gap-4"> 
       <h3 className=" text-lg font-semibold">
