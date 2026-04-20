@@ -1,5 +1,5 @@
 import NewsBlock from "../components/news-block";
-import Shemogviertdi from "../components/shemogviertdi";
+import JoinUs from "../components/JoinUs";
 import mziuriImage from "../assets/mziuri-carusel.png";
 
 import Carousel from "react-multi-carousel";
@@ -64,10 +64,9 @@ export default function Home() {
 </Carousel>
       </div>
 
-      {/* EXISTING CONTENT */}
       <div className="flex justify-center items-start gap-8 mt-6 p-[100px]">
         <NewsBlock />
-        <Shemogviertdi />
+        <JoinUs />
       </div>
     </>
   );

@@ -9,7 +9,7 @@ export default function Layout() {
 
   return (
     <>
-      <Navbar />
+    <Navbar />
       <main>
         <Outlet />
       </main>
