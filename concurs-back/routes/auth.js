@@ -1,6 +1,7 @@
 import express from "express";
 import { registerSchema } from "../validations/auth.js";
 import { pool } from "../data/data.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -36,6 +37,10 @@ router.post("/students", async (req, res) => {
       password,
     } = result.data;
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // console.log(hashedPassword);
+
     const sql = `
       INSERT INTO students 
       (first_name, last_name, email, phone, class, region, username, password) 
@@ -50,11 +55,10 @@ router.post("/students", async (req, res) => {
       studentClass,
       region,
       username,
-      password,
+      hashedPassword,
     ]);
 
     res.status(201).json({ message: "Student inserted successfully" });
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Server error" });
