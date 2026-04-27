@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+
+// .regex(/^\+9955\d{8}$/, "ტელეფონი უნდა იყოს ფორმატში +9955XXXXXXXX")
 const regions = [
   "თბილისი",
   "კახეთი",
@@ -15,21 +17,19 @@ const regions = [
   "სამცხე-ჯავახეთი",
   "მცხეთა-მთიანეთი",
 ];
-// AXLEBI
-//COERCE
-// const phoneRegex = /^\+?9955\d{8}$/;
 
 const schema = z.object({
   firstName: z.string().min(2, "სახელი სავალდებულოა"),
   lastName: z.string().min(2, "გვარი სავალდებულოა"),
   email: z.email("არასწორი ელ.ფოსტა"),
-  phone: z.string().min(9, "ნომერი უნდა იყოს მინიმუმ 9 სიმბოლო").max(9, "ნომერი უნდა იყოს მაქსიმუმ 9 სიმბოლო"),
+  phone: z.string().min(9).max(9),
   class: z.coerce
     .number()
     .min(6, "კლასი უნდა იყოს მინიმუმ 6")
     .max(12, "კლასი უნდა იყოს მაქსიმუმ 12"),
   region: z.string().min(1, "აირჩიე რეგიონი"),
   username: z.string().min(2, "მინიმუმ 2 სიმბოლო"),
+  password: z.string().min(6, "პაროლი მინიმუმ 6 სიმბოლო"),
 });
 
 export default function Register() {
@@ -41,9 +41,26 @@ export default function Register() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = async (data) => {
+  try {
+    const res = await fetch("http://localhost:3000/students", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.message || "Something went wrong");
+    }
+
+  } catch (err) {
+    console.error("Error:", err.message);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-yellow-400 px-4">

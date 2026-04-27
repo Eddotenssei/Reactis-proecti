@@ -39,7 +39,6 @@ router.post("/students", async (req, res) => {
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    // console.log(hashedPassword);
 
     const sql = `
       INSERT INTO students 
