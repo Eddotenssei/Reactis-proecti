@@ -1,5 +1,5 @@
 import express from "express";
-import { pool } from "../data/db.js";
+import { pool } from "../data/data.js";
 import { loginSchema } from "../validations/auth.js";
 
 const router = express.Router();

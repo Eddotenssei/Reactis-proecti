@@ -1,6 +1,6 @@
 import express from "express";
-import { studentSchema } from "../validations/student.js"; // ან auth.js
-import { pool } from "../data/db.js";
+import { registerSchema } from "../validations/auth.js";
+import { pool } from "../data/data.js";
 
 const router = express.Router();
 
