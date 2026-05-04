@@ -31,7 +31,7 @@ router.post("/students", async (req, res) => {
       last_name,
       email,
       phone,
-      class: studentClass,
+      grade, // ✅ directly use grade now
       region,
       username,
       password,
@@ -42,7 +42,7 @@ router.post("/students", async (req, res) => {
 
     const sql = `
       INSERT INTO students 
-      (first_name, last_name, email, phone, class, region, username, password) 
+      (first_name, last_name, email, phone, grade, region, username, password) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
@@ -51,7 +51,7 @@ router.post("/students", async (req, res) => {
       last_name,
       email,
       phone,
-      studentClass,
+      grade, // ✅ no workaround needed
       region,
       username,
       hashedPassword,

@@ -1,12 +1,12 @@
 import express from "express";
 import { pool } from "../data/data.js";
-import { loginSchema } from "../validations/auth.js";
+import { registerSchema } from "../validations/auth.js";
 
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   try {
-    const result = loginSchema.safeParse(req.body);
+    const result = registerSchema.safeParse(req.body);
 
     if (!result.success) {
       return res.status(400).json({

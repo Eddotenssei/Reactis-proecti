@@ -19,11 +19,11 @@ const regions = [
 ];
 
 const schema = z.object({
-  firstName: z.string().min(2, "სახელი სავალდებულოა"),
-  lastName: z.string().min(2, "გვარი სავალდებულოა"),
+  first_name: z.string().min(2, "სახელი სავალდებულოა"),
+  last_name: z.string().min(2, "გვარი სავალდებულოა"),
   email: z.email("არასწორი ელ.ფოსტა"),
   phone: z.string().min(9).max(9),
-  class: z.coerce
+  grade: z.coerce
     .number()
     .min(6, "კლასი უნდა იყოს მინიმუმ 6")
     .max(12, "კლასი უნდა იყოს მაქსიმუმ 12"),
@@ -41,7 +41,8 @@ export default function Register() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data) => {
+
+    const onSubmit = async (data) => {
   try {
     const res = await fetch("http://localhost:3000/students", {
       method: "POST",
@@ -57,8 +58,15 @@ export default function Register() {
       throw new Error(result.message || "Something went wrong");
     }
 
+    // ✅ success
+    alert("Registration successful!");
+
+    // redirect to "/"
+    window.location.href = "/";
+
   } catch (err) {
     console.error("Error:", err.message);
+    alert(err.message);
   }
 };
 
@@ -76,13 +84,13 @@ export default function Register() {
           <p className="block text-yellow-200 font-medium">სახელი</p>
           <input
             id="firstName"
-            {...register("firstName")}
+            {...register("first_name")}
             placeholder="სახელი"
             className="input"
           />
-          {errors.firstName && (
+          {errors.first_name && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.firstName.message}
+              {errors.first_name.message}
             </p>
           )}
         </div>
@@ -91,13 +99,13 @@ export default function Register() {
           <p className="block text-yellow-200 font-medium">გვარი</p>
           <input
             id="lastName"
-            {...register("lastName")}
+            {...register("last_name")}
             placeholder="გვარი"
             className="input"
           />
-          {errors.lastName && (
+          {errors.last_name && (
             <p className="text-red-500 text-sm mt-1">
-              {errors.lastName.message}
+              {errors.last_name.message}
             </p>
           )}
         </div>
@@ -133,12 +141,12 @@ export default function Register() {
           <input
             id="class"
             type="number"
-            {...register("class")}
+            {...register("grade")}
             placeholder="კლასი"
             className="input"
           />
-          {errors.class && (
-            <p className="text-red-500 text-sm mt-1">{errors.class.message}</p>
+          {errors.grade && (
+            <p className="text-red-500 text-sm mt-1">{errors.grade.message}</p>
           )}
         </div>
 
