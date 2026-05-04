@@ -6,7 +6,6 @@ export const registerSchema = z.object({
   email: z.string().email(),
   phone: z.string().max(20),
 
-  // ✅ FIXED
   grade: z.coerce.number().min(6).max(12),
 
   region: z.string().max(100),

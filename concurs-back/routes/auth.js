@@ -31,7 +31,7 @@ router.post("/students", async (req, res) => {
       last_name,
       email,
       phone,
-      grade, // ✅ directly use grade now
+      grade,
       region,
       username,
       password,
@@ -51,7 +51,7 @@ router.post("/students", async (req, res) => {
       last_name,
       email,
       phone,
-      grade, // ✅ no workaround needed
+      grade,
       region,
       username,
       hashedPassword,

@@ -58,10 +58,8 @@ export default function Register() {
       throw new Error(result.message || "Something went wrong");
     }
 
-    // ✅ success
     alert("Registration successful!");
 
-    // redirect to "/"
     window.location.href = "/";
 
   } catch (err) {
