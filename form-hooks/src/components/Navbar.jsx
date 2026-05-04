@@ -9,6 +9,10 @@ export default function Navbar() {
     if (value) navigate(value);
   };
 
+  const goToProvision = (id) => {
+    navigate(`/provision/${id}`);
+  };
+
   return (
     <>
       <header>
@@ -28,15 +32,19 @@ export default function Navbar() {
               />
             </Link>
 
+
             <div className="relative group h-14 flex items-center border-r-2 border-black">
               <select
-                onChange={handleNavigate}
+                onChange={(e) => goToProvision(e.target.value)}
                 defaultValue=""
                 className="appearance-none bg-transparent h-full px-5 pr-9 cursor-pointer focus:outline-none text-sm font-medium tracking-wide hover:bg-black hover:text-[#FBC946] transition-colors duration-150"
               >
-                <option value="/goal">მიზანი</option>
-                <option value="/prizes">პრიზები</option>
-                <option value="/rules">წესები</option>
+                <option value="" disabled hidden>
+                  Provision
+                </option>
+                <option value="1">მიზანი</option>
+                <option value="2">პრიზები</option>
+                <option value="3">წესები</option>
               </select>
               <span className="absolute right-3 pointer-events-none text-xs opacity-60">
                 ▾

@@ -3,7 +3,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-// .regex(/^\+9955\d{8}$/, "ტელეფონი უნდა იყოს ფორმატში +9955XXXXXXXX")
 const regions = [
   "თბილისი",
   "კახეთი",
@@ -22,7 +21,7 @@ const schema = z.object({
   first_name: z.string().min(2, "სახელი სავალდებულოა"),
   last_name: z.string().min(2, "გვარი სავალდებულოა"),
   email: z.email("არასწორი ელ.ფოსტა"),
-  phone: z.string().min(9).max(9),
+  phone: z.string().regex(/^\+9955\d{8}$/, "ტელეფონი უნდა იყოს ფორმატში +9955XXXXXXXX"),
   grade: z.coerce
     .number()
     .min(6, "კლასი უნდა იყოს მინიმუმ 6")

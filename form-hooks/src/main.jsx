@@ -7,6 +7,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Layout from "./pages/layout";
 import Home from "./pages/home";
+import Provision from "./pages/provision";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/provision/:id",
+        element: <Provision />,
       },
       {
         path: "/login",
